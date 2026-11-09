@@ -36,3 +36,11 @@ class ServiceOut(BaseModel):
     owner_id: uuid.UUID
     is_active: bool
     created_at: datetime
+    source: Optional[str] = None
+    source_url: Optional[str] = None
+    price_note: Optional[str] = None
+    contact_phone: Optional[str] = None
+    contact_website: Optional[str] = None
+    address: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None

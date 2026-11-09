@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.routes import user, auth, service, product, alert, order
+from app.api.routes import user, auth, service, product, alert, order, news, admin
 
 apiRouter = APIRouter(prefix="/api", tags=["API"])
 
@@ -10,6 +10,8 @@ apiRouter.include_router(service.router)
 apiRouter.include_router(product.router)
 apiRouter.include_router(alert.router)
 apiRouter.include_router(order.router)
+apiRouter.include_router(news.router)
+apiRouter.include_router(admin.router)
 
 
 @apiRouter.get("/")
@@ -28,5 +30,8 @@ def api_root():
             "products":      {"href": "/api/products", "method": "GET"},
             "alerts":        {"href": "/api/alerts", "method": "GET"},
             "my_orders":     {"href": "/api/orders/my-orders", "method": "GET"},
+            "news":          {"href": "/api/news", "method": "GET"},
+            "seed_osm":      {"href": "/api/admin/catalog/seed/osm", "method": "POST"},
+            "refresh_news":  {"href": "/api/admin/news/refresh", "method": "POST"},
         },
     }

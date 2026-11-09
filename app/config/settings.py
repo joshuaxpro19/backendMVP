@@ -25,6 +25,12 @@ class Settings(BaseSettings):
 
     database_url: Optional[str] = None
 
+    # Fuentes externas (scraping e importación de catálogo)
+    indeci_url: str = "https://portal.indeci.gob.pe/informe/informe-de-peligros/"
+    overpass_url: str = "https://overpass-api.de/api/interpreter"
+    http_timeout_seconds: int = 45
+    osm_timeout_seconds: int = 90
+
     def model_post_init(self, __context):
         if self.security and self.secret_key == "change-this-secret-key-in-production":
             self.secret_key = self.security

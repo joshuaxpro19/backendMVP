@@ -2,26 +2,21 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import text
 
 from app.api.routes import api
 from app.infrastructure.database.base import Base
 from app.infrastructure.database.connection import engine
+from app.infrastructure.database.migrations import aplicar_migraciones
 
 # Import all models so SQLAlchemy registers them before create_all
-from app.domain.models import user, service, product, alert, order  # noqa: F401
+from app.domain.models import user, service, product, alert, order, news  # noqa: F401
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Create all tables and columns on startup (dev/MVP mode)."""
+    """Create tables and apply pending columns on startup (dev/MVP mode)."""
     Base.metadata.create_all(bind=engine)
-    try:
-        with engine.connect() as conn:
-            conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS phone VARCHAR(20) UNIQUE;"))
-            conn.commit()
-    except Exception:
-        pass
+    aplicar_migraciones(engine)
     yield
 
 
