@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.routes import user, auth, service, product, alert, order
+from app.api.routes import user, auth, service, product, alert, order, scraping, vecinal
 
 apiRouter = APIRouter(prefix="/api", tags=["API"])
 
@@ -10,6 +10,9 @@ apiRouter.include_router(service.router)
 apiRouter.include_router(product.router)
 apiRouter.include_router(alert.router)
 apiRouter.include_router(order.router)
+apiRouter.include_router(scraping.router)
+# Contrato que consume el front de Vecinal Solidaria (ver front/API-CONTRATO.md)
+apiRouter.include_router(vecinal.router)
 
 
 @apiRouter.get("/")
@@ -28,5 +31,7 @@ def api_root():
             "products":      {"href": "/api/products", "method": "GET"},
             "alerts":        {"href": "/api/alerts", "method": "GET"},
             "my_orders":     {"href": "/api/orders/my-orders", "method": "GET"},
+            "scraped_posts": {"href": "/api/scraping/posts", "method": "GET"},
+            "scraping_run":  {"href": "/api/scraping/run", "method": "POST"},
         },
     }

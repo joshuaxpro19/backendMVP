@@ -1,7 +1,8 @@
 import uuid
 from datetime import datetime
+from typing import Optional
 
-from sqlalchemy import String, Boolean, Enum as SAEnum, DateTime, func
+from sqlalchemy import String, Boolean, Enum as SAEnum, DateTime, Integer, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.dialects.postgresql import UUID as PGUUID
 
@@ -28,6 +29,17 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
+
+    # Perfil vecinal (lo que pinta el front de Vecinal Solidaria)
+    zona: Mapped[str] = mapped_column(String(80), default="Piura Centro", nullable=False)
+    yape: Mapped[str] = mapped_column(String(40), default="", nullable=False)
+    plin: Mapped[str] = mapped_column(String(40), default="", nullable=False)
+    telefono_verificado: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    mostrar_contacto: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    # Freno a la fuerza bruta en /api/login
+    intentos_fallidos: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    bloqueado_hasta: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
 
     # Relationships
     services: Mapped[list["Service"]] = relationship("Service", back_populates="owner", cascade="all, delete-orphan")

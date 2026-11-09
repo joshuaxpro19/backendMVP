@@ -8,5 +8,14 @@ venv
 .idea
 .vscode
 pgdata
+data
+*.db
 README.md
 tests
+
+# Frontends y artefactos locales (no pertenecen a la imagen del backend)
+front
+mobile
+tools
+vecinal-backend-ref
+.pytest_cache

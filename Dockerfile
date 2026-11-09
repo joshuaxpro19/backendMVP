@@ -13,8 +13,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+
+# Los navegadores de Playwright pesan ~1 GB. Para la demo (sin scraping) se
+# puede compilar con --build-arg INSTALAR_PLAYWRIGHT=0.
+ARG INSTALAR_PLAYWRIGHT=1
 RUN pip install --no-cache-dir -r requirements.txt \
-    && playwright install --with-deps chromium
+    && if [ "$INSTALAR_PLAYWRIGHT" = "1" ]; then playwright install --with-deps chromium; fi
 
 COPY . .
 

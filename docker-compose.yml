@@ -1,6 +1,10 @@
 services:
   api:
-    build: .
+    build:
+      context: .
+      args:
+        # Para la demo: INSTALAR_PLAYWRIGHT=0 docker compose up -d --build
+        INSTALAR_PLAYWRIGHT: ${INSTALAR_PLAYWRIGHT:-1}
     container_name: mvp-api
     ports:
       - "8000:8000"

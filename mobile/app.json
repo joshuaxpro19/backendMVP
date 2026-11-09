@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "DelBarrio",
+    "slug": "delbarrio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "delbarrio",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "pe.delbarrio.app"
+    },
+    "android": {
+      "package": "pe.delbarrio.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#f0e5d1",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La app usa tus fotos para acompañar una publicación."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "La app usa tu ubicación para mostrar tu sector y calcular distancias."
+        }
+      ],
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#f0e5d1"
+        }
+      ]
+    ]
+  }
+}

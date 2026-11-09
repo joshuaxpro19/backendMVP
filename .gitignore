@@ -17,3 +17,16 @@ pgdata/
 # Playwright
 playwright-report/
 test-results/
+
+# Scraping artifacts (sesión de FB, imágenes, bases locales)
+data/
+*.db
+
+# Binario de cloudflared para la demo (se descarga solo)
+tools/
+
+# Front web original: tiene su propio repositorio y solo se usa como referencia
+front/
+
+# Cachés de herramientas
+.pytest_cache/
